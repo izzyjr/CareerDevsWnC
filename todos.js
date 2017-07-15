@@ -1,16 +1,39 @@
-["item 1", "item 2", "item 3"]
+function sayHiTo(person) {
+    console.log('Hi', person);
+}
 
-var todos = ["item 1", "item 2", "item 3"] // 1.) place to store todos
+sayHiTo('Israel')
 
-console.log('My Todos:', todos) // 2.) place to print todos
+var todos =["item 1", "item 2", "item 3",]  //function to display todos
+    function displayTodos( ){
+    console.log('My Todos:', todos);
+ }
+ 
+ displayTodos( )
+ 
+function addTodo (todo) {   //function to add todos    
+    todos.push(todo);
+    displayTodos( );
+ }
+ 
+addTodo("hey Israel")
 
-todos.push("item 4") // 3.) way to add more todos
+function changeTodo(position, newValue){    //function to change todos
+    todos[position] = newValue;
+    displayTodos( );
+}
 
-todos[0] = "item 1 updated" // 4.) way to change an existing todos
+changeTodo(0, "just do it")
 
-todos.splice(1, 2) //.5) way to delete a todos 
+function deleteTodo(position, numItems){    //function to delete todos
+    todos.splice(position, numItems);
+    displayTodos( );
+    
+}
 
-console.log(todos) 
+deleteTodo(3, 1)
+
+
 
 
 
