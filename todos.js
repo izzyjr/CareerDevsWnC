@@ -1,39 +1,60 @@
-function sayHiTo(person) {
-    console.log('Hi', person);
-}
+//Version 3
 
-sayHiTo('Israel')
+var myComputer = {          // Object
+    operatingSystem: 'mac',
+    screenSize: '15 inches',
+    purchaseYear: 2011
+};
 
-var todos =["item 1", "item 2", "item 3",]  //function to display todos
-    function displayTodos( ){
-    console.log('My Todos:', todos);
- }
- 
- displayTodos( )
- 
-function addTodo (todo) {   //function to add todos    
-    todos.push(todo);
-    displayTodos( );
- }
- 
-addTodo("hey Israel")
+console.log(myComputer.purchaseYear)
 
-function changeTodo(position, newValue){    //function to change todos
-    todos[position] = newValue;
-    displayTodos( );
-}
+var gordon = {              // Method = a function on an object. property = function
+    name: 'Gordon',
+    sayName: function ( ){
+        console.log(this.name);
+    }
+};
 
-changeTodo(0, "just do it")
+gordon.sayName( )
 
-function deleteTodo(position, numItems){    //function to delete todos
-    todos.splice(position, numItems);
-    displayTodos( );
+var todos = ['item 1', 'item 2', 'item 3']; 
+
+// Functions as properties in objects are known as methods
+
+ var todoList = {
+    todos: ['item 1', 'item 2', 'item 3'], // todos array as a property in an object
     
-}
+    displayTodos: function ( ){             //Method to display todos
+        console.log('My Todos:', this.todos);
+    },
+    addTodo: function (todo) {   //Method to add todos    
+    this.todos.push(todo);
+    this.displayTodos( );
+    },
+    changeTodo: function (position, newValue){    //Method to change todos
+    this.todos[position] = newValue;
+    this.displayTodos( );
+    },
+    deleteTodo: function (position, numItems){    //Method to delete todos
+    this.todos.splice(position, numItems);
+    this.displayTodos( );
+    },
+};
 
-deleteTodo(3, 1)
+todoList.displayTodos( )
+
+todoList.addTodo('c9')
+
+todoList.changeTodo(0, 'number one')
+
+todoList.deleteTodo(3, 1)
 
 
+
+
+
+
+ 
 
 
 
