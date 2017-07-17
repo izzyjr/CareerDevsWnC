@@ -1,53 +1,47 @@
-//Version 3
+//Version 4
 
-var myComputer = {          // Object
-    operatingSystem: 'mac',
-    screenSize: '15 inches',
-    purchaseYear: 2011
-};
-
-console.log(myComputer.purchaseYear)
-
-var gordon = {              // Method = a function on an object. property = function
-    name: 'Gordon',
-    sayName: function ( ){
-        console.log(this.name);
-    }
-};
-
-gordon.sayName( )
-
-var todos = ['item 1', 'item 2', 'item 3']; 
-
-// Functions as properties in objects are known as methods
-
- var todoList = {
-    todos: ['item 1', 'item 2', 'item 3'], // todos array as a property in an object
+var todoList = {
+    todos: [], // todos array ( which contains an object) is a property in an object
     
     displayTodos: function ( ){             //Method to display todos
         console.log('My Todos:', this.todos);
     },
-    addTodo: function (todo) {   //Method to add todos    
-    this.todos.push(todo);
+    addTodo: function (todoText) {   //Method to add todos    
+    this.todos.push({
+        todoText: todoText,
+        completed: false // Boolean true or false
+    });
     this.displayTodos( );
     },
-    changeTodo: function (position, newValue){    //Method to change todos
-    this.todos[position] = newValue;
+    changeTodo: function (position, todoText){    //Method to change todos
+    this.todos[position].todoText = todoText;
+    // this.todos[position] = newValue;
     this.displayTodos( );
     },
     deleteTodo: function (position, numItems){    //Method to delete todos
     this.todos.splice(position, numItems);
     this.displayTodos( );
     },
+    toggleCompleted: function(position){
+        var todo = this.todos[position];
+        todo.completed = !todo.completed;
+        this.displayTodos();
+        
+    }
 };
 
-todoList.displayTodos( )
+//todoList.displayTodos( )
 
-todoList.addTodo('c9')
+//todoList.addTodo('this is an Object')
 
-todoList.changeTodo(0, 'number one')
+//todoList.changeTodo(0, 'second try')
 
-todoList.deleteTodo(3, 1)
+todoList.addTodo('boolean testing')
+
+todoList.toggleCompleted(0)
+
+
+
 
 
 
