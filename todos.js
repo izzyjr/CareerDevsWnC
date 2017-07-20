@@ -1,39 +1,4 @@
-// Version 5 - For Loops
-
-//i = 0 - Initialization
-//Say "Hey" IF i < 3 - Condition
-//Increase i by 1 - Final-Expression
-
-//0 "Hey"
-//1 "Hey"
-//2 "Hey"
-//3 i is no longer < 3
-
-// for(Initialization, Condition, Final-Expression) {
-// console.log("Hey");
-//}
-
-// for (var i = 0; i < 3; i++) {
-    // console.log("Hey");
-// }
- 
-// for (var i = 0; i < 3; i++) {
-    // console.log(i);
-// }
-
-// var testArray = ['item 1', 'item 2', 'item 3'];
-
-// for (var i = 0; i < testArray.length; i++) {
-    // console.log(i);
-    // console.log(testArray[i]);
-// }
-
-// testArray.push('extra item')
-
-//for (var i = 0; i < testArray.length; i++) {
-    // console.log(i);
-    // console.log(testArray[i]);
-// }
+//Version 6
 
 var todoList = {
     todos: [], 
@@ -49,7 +14,7 @@ var todoList = {
             console.log ('(x)', this.todos[i].todoText);
             }
         else {
-            console.log ('()', this.todos[i].todoText);
+            console.log ('( )', this.todos[i].todoText);
             }
         }
         }
@@ -75,19 +40,55 @@ var todoList = {
         todo.completed = !todo.completed;
         this.displayTodos();
         
-    }
+    },
+    toggleAll: function( ){
+        var totalTodos = this.todos.length;
+        var completedTodos = 0;
+        
+        for (var i = 0; i < this.todos.length; i++){
+            if (this.todos[i].completed === true){
+                completedTodos++;
+            }
+        }
+        if (completedTodos === totalTodos) {        //if everything is true make everything false
+            for(var i = 0; i < totalTodos; i++){
+                this.todos[i].completed = false;
+            }
+        }
+        else {                                      //otherwise make everything true
+            for (var i = 0; i < totalTodos; i++){
+                this.todos[i].completed = true;
+            }
+        }
+        this.displayTodos();
+    },
 };
 
-todoList.addTodo('code!')
+// todoList.addTodo('item 1') 
+// todoList.addTodo('item 2')
+// todoList.addTodo('item 3')
+
+// todoList.toggleCompleted(0)
+// todoList.toggleCompleted(1)
+// todoList.toggleCompleted(2)
+
+// todoList.toggleAll()
+// todoList.displayTodos()
+
+todoList.addTodo('item 1')
+todoList.addTodo('item 2')
+todoList.addTodo('item 3')
 
 todoList.toggleCompleted(0)
 
 
 
+todoList.toggleAll()
 
 
 
- 
+
+
 
 
 
