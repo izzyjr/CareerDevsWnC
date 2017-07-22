@@ -1,4 +1,4 @@
-//Version 7
+//Version 8
 
 var todoList = {
     todos: [], 
@@ -66,24 +66,34 @@ var todoList = {
 
 
 //1.) We want to get access to the button.
-var displayTodosButton = document.getElementById('displayTodosButton');
+// var displayTodosButton = document.getElementById('displayTodosButton'); 
 
-var toggleAllButton = document.getElementById('toggleAllButton');
+// var toggleAllButton = document.getElementById('toggleAllButton');
 
 //2.) We want to run the  method when someone clicks the button.
 
-todoList.addTodo("first item")
+// todoList.addTodo("first item")
 
-displayTodosButton.addEventListener('click', function( ){
-    todoList.displayTodos( );
-})
+// displayTodosButton.addEventListener('click', function( ){
+    // todoList.displayTodos( );
+// })
 
-toggleAllButton.addEventListener('click', function( ){
-    todoList.toggleAll( );
-})
+// toggleAllButton.addEventListener('click', function( ){
+    // todoList.toggleAll( );
+// })
+
+// ^ All of this code is no longer needed becuase of refactoring
 
 
-
+var handlers = {
+    displayTodos: function( ){
+        todoList.displayTodos( );
+    },
+    toggleAll: function( ){
+        todoList.toggleAll( );
+    }
+    
+};
 
 
 
