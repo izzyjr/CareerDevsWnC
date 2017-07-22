@@ -1,5 +1,4 @@
 //Version 8
-
 var todoList = {
     todos: [], 
     
@@ -64,34 +63,35 @@ var todoList = {
     },
 };
 
-
-//1.) We want to get access to the button.
-// var displayTodosButton = document.getElementById('displayTodosButton'); 
-
-// var toggleAllButton = document.getElementById('toggleAllButton');
-
-//2.) We want to run the  method when someone clicks the button.
-
-// todoList.addTodo("first item")
-
-// displayTodosButton.addEventListener('click', function( ){
-    // todoList.displayTodos( );
-// })
-
-// toggleAllButton.addEventListener('click', function( ){
-    // todoList.toggleAll( );
-// })
-
-// ^ All of this code is no longer needed becuase of refactoring
-
-
 var handlers = {
     displayTodos: function( ){
         todoList.displayTodos( );
     },
     toggleAll: function( ){
         todoList.toggleAll( );
+    },
+    addTodo: function( ){
+        var addTodoTextInput = document.getElementById('addTodoTextInput');
+        todoList.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
+        // ^ There should be a button for adding todos
+    },
+    changeTodo: function( ){
+        var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+        var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+        todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.valueAsNumber = '';
+        changeTodoTextInput.value = '';
+    },
+        // ^ There should be a button for changing todos
+    deleteTodo: function( ){
+        var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+        var deleteTodoNumItemsInput = document.getElementById('deleteTodoNumItemsInput');
+        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber, deleteTodoNumItemsInput.valueAsNumber);
+        deleteTodoPositionInput.valueAsNumber = '';
+        deleteTodoNumItemsInput.valueAsNumber = '';
     }
+        // ^ There should be a buttton for deleting todos
     
 };
 
