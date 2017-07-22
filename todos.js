@@ -1,9 +1,9 @@
-//Version 6
+//Version 7
 
 var todoList = {
     todos: [], 
     
-    displayTodos: function ( ){     //displays todoText within each Object added in the array todos         
+    displayTodos: function ( ){              
         if (this.todos.length === 0) {
             console.log('your todo list is empty!')
         }
@@ -50,12 +50,12 @@ var todoList = {
                 completedTodos++;
             }
         }
-        if (completedTodos === totalTodos) {        //if everything is true make everything false
+        if (completedTodos === totalTodos) {        
             for(var i = 0; i < totalTodos; i++){
                 this.todos[i].completed = false;
             }
         }
-        else {                                      //otherwise make everything true
+        else {                                      
             for (var i = 0; i < totalTodos; i++){
                 this.todos[i].completed = true;
             }
@@ -64,28 +64,23 @@ var todoList = {
     },
 };
 
-// todoList.addTodo('item 1') 
-// todoList.addTodo('item 2')
-// todoList.addTodo('item 3')
 
-// todoList.toggleCompleted(0)
-// todoList.toggleCompleted(1)
-// todoList.toggleCompleted(2)
+//1.) We want to get access to the button.
+var displayTodosButton = document.getElementById('displayTodosButton');
 
-// todoList.toggleAll()
-// todoList.displayTodos()
+var toggleAllButton = document.getElementById('toggleAllButton');
 
-todoList.addTodo('item 1')
-todoList.addTodo('item 2')
-todoList.addTodo('item 3')
+//2.) We want to run the  method when someone clicks the button.
 
-todoList.toggleCompleted(0)
+todoList.addTodo("first item")
 
+displayTodosButton.addEventListener('click', function( ){
+    todoList.displayTodos( );
+})
 
-
-todoList.toggleAll()
-
-
+toggleAllButton.addEventListener('click', function( ){
+    todoList.toggleAll( );
+})
 
 
 
