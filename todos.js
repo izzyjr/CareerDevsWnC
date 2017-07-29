@@ -90,8 +90,14 @@ var handlers = {
         todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber, deleteTodoNumItemsInput.valueAsNumber);
         deleteTodoPositionInput.valueAsNumber = '';
         deleteTodoNumItemsInput.valueAsNumber = '';
-    }
+    },
         // ^ There should be a buttton for deleting todos
+    toggleCompleted: function ( ){
+        var toggleCompletedTodoPositionInput = document.getElementById('toggleCompletedTodoPositionInput');
+        todoList.toggleCompleted(toggleCompletedTodoPositionInput.valueAsNumber);
+        toggleCompletedTodoPositionInput.value = '';
+    }
+    //  ^ There should be a button for toggling completed todos
     
 };
 
