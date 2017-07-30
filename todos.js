@@ -1,43 +1,27 @@
-//Version 8
+//Version 9
 var todoList = {
     todos: [], 
     
-    displayTodos: function ( ){              
-        if (this.todos.length === 0) {
-            console.log('your todo list is empty!')
-        }
-        else {
-        console.log('My Todos:');
-        for (var i = 0; i < this.todos.length; i++) {
-        if (this.todos[i].completed === true) {
-            console.log ('(x)', this.todos[i].todoText);
-            }
-        else {
-            console.log ('( )', this.todos[i].todoText);
-            }
-        }
-        }
-    },
     addTodo: function (todoText) {       
     this.todos.push({
         todoText: todoText,
         completed: false 
     });
-    this.displayTodos( );
+   
     },
     changeTodo: function (position, todoText){    
     this.todos[position].todoText = todoText;
     
-    this.displayTodos( );
+    
     },
     deleteTodo: function (position, numItems){    
     this.todos.splice(position, numItems);
-    this.displayTodos( );
+    
     },
     toggleCompleted: function(position){
         var todo = this.todos[position];
         todo.completed = !todo.completed;
-        this.displayTodos();
+        
         
     },
     toggleAll: function( ){
@@ -59,21 +43,20 @@ var todoList = {
                 this.todos[i].completed = true;
             }
         }
-        this.displayTodos();
+        
     },
 };
 
 var handlers = {
-    displayTodos: function( ){
-        todoList.displayTodos( );
-    },
     toggleAll: function( ){
         todoList.toggleAll( );
+        view.displayTodos( );
     },
     addTodo: function( ){
         var addTodoTextInput = document.getElementById('addTodoTextInput');
         todoList.addTodo(addTodoTextInput.value);
         addTodoTextInput.value = '';
+        view.displayTodos( );
         // ^ There should be a button for adding todos
     },
     changeTodo: function( ){
@@ -82,6 +65,7 @@ var handlers = {
         todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
         changeTodoPositionInput.valueAsNumber = '';
         changeTodoTextInput.value = '';
+        view.displayTodos( );
     },
         // ^ There should be a button for changing todos
     deleteTodo: function( ){
@@ -90,15 +74,42 @@ var handlers = {
         todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber, deleteTodoNumItemsInput.valueAsNumber);
         deleteTodoPositionInput.valueAsNumber = '';
         deleteTodoNumItemsInput.valueAsNumber = '';
+        view.displayTodos( );
     },
         // ^ There should be a buttton for deleting todos
     toggleCompleted: function ( ){
         var toggleCompletedTodoPositionInput = document.getElementById('toggleCompletedTodoPositionInput');
         todoList.toggleCompleted(toggleCompletedTodoPositionInput.valueAsNumber);
         toggleCompletedTodoPositionInput.value = '';
+        view.displayTodos( );
     }
     //  ^ There should be a button for toggling completed todos
     
+};
+
+var view = {
+    displayTodos:  function ( ){
+        var todosUl = document.querySelector('ul');
+        todosUl.innerHTML = '';
+        for (var i = 0; i < todoList.todos.length; i++) {
+            var todoLi = document.createElement('li');
+            var todo = todoList.todos[i];
+            var todoTextWithCompletion = '';
+            
+            if (todo.completed === true ){
+                todoTextWithCompletion = '(x) ' + todo.todoText;
+            }
+            else {
+                todoTextWithCompletion = '( ) ' + todo.todoText;
+            }
+            todoLi.textContent = todoTextWithCompletion;
+            todosUl.appendChild(todoLi);
+        };
+        
+    }
+    //  ^ There should be an element for each todos
+    //  ^ Each li element should containe .todotext
+    //  ^ Each li element should show .completion
 };
 
 
