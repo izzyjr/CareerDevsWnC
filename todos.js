@@ -1,60 +1,127 @@
-//Version 3
-
-var myComputer = {          // Object
-    operatingSystem: 'mac',
-    screenSize: '15 inches',
-    purchaseYear: 2011
-};
-
-console.log(myComputer.purchaseYear)
-
-var gordon = {              // Method = a function on an object. property = function
-    name: 'Gordon',
-    sayName: function ( ){
-        console.log(this.name);
+//Version 11
+var todoList = {
+    todos: [], 
+    
+    addTodo: function (todoText) {       
+    this.todos.push({
+        todoText: todoText,
+        completed: false 
+    });
+   
+    },
+    changeTodo: function (position, todoText){    
+    this.todos[position].todoText = todoText;
+    
+    
+    },
+    deleteTodo: function (position){    
+    this.todos.splice(position);
+    
+    },
+    toggleCompleted: function(position){
+        var todo = this.todos[position];
+        todo.completed = !todo.completed;
+        
+        
+    },
+    toggleAll: function( ){
+        var totalTodos = this.todos.length;
+        var completedTodos = 0;
+        
+        this.todos.forEach(function(todo){
+            if (todo.completed === true){
+                completedTodos++;
+            }
+        });
+        this.todos.forEach(function(todo){
+            if(completedTodos === totalTodos) {
+                todo.completed = false;
+            }
+            else{
+                todo.completed = true;
+            }
+            
+        });
     }
 };
 
-gordon.sayName( )
-
-var todos = ['item 1', 'item 2', 'item 3']; 
-
-// Functions as properties in objects are known as methods
-
- var todoList = {
-    todos: ['item 1', 'item 2', 'item 3'], // todos array as a property in an object
+var handlers = {
+    toggleAll: function( ){
+        todoList.toggleAll( );
+        view.displayTodos( );
+    },
+    addTodo: function( ){
+        var addTodoTextInput = document.getElementById('addTodoTextInput');
+        todoList.addTodo(addTodoTextInput.value);
+        addTodoTextInput.value = '';
+        view.displayTodos( );
+        // ^ There should be a button for adding todos
+    },
+    changeTodo: function( ){
+        var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+        var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+        todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.valueAsNumber = '';
+        changeTodoTextInput.value = '';
+        view.displayTodos( );
+    },
+        // ^ There should be a button for changing todos
+    deleteTodo: function(position){
+        todoList.deleteTodo(position);
+        view.displayTodos( );
+    },
+        // ^ There should be a buttton for deleting todos
+    toggleCompleted: function ( ){
+        var toggleCompletedTodoPositionInput = document.getElementById('toggleCompletedTodoPositionInput');
+        todoList.toggleCompleted(toggleCompletedTodoPositionInput.valueAsNumber);
+        toggleCompletedTodoPositionInput.value = '';
+        view.displayTodos( );
+    }
+    //  ^ There should be a button for toggling completed todos
     
-    displayTodos: function ( ){             //Method to display todos
-        console.log('My Todos:', this.todos);
-    },
-    addTodo: function (todo) {   //Method to add todos    
-    this.todos.push(todo);
-    this.displayTodos( );
-    },
-    changeTodo: function (position, newValue){    //Method to change todos
-    this.todos[position] = newValue;
-    this.displayTodos( );
-    },
-    deleteTodo: function (position, numItems){    //Method to delete todos
-    this.todos.splice(position, numItems);
-    this.displayTodos( );
-    },
 };
 
-todoList.displayTodos( )
+var view = {
+    displayTodos:  function ( ){
+        var todosUl = document.querySelector('ul');
+        todosUl.innerHTML = '';
+        todoList.todos.forEach(function(todo, position){
+            var todoLi = document.createElement('li');
+            var todoTextWithCompletion = '';
+            if (todo.completed === true ){
+                todoTextWithCompletion = '(x) ' + todo.todoText;
+            }
+            else {
+                todoTextWithCompletion = '( ) ' + todo.todoText;
+            }
+            todoLi.id = position;
+            todoLi.textContent = todoTextWithCompletion;
+            todoLi.appendChild(this.createDeleteButton( )); 
+            todosUl.appendChild(todoLi);
+            
+        }, this);
+    },
+    createDeleteButton: function( ){
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'deleteButton';
+        return deleteButton;
+    },
+    // There should be a way to create delete buttons
+    setUpEventListeners: function( ) {
+        var todosUl = document.querySelector('ul');
+        todosUl.addEventListener('click', function(event) {
+            // Get element that was clicked on
+            var elementClicked = event.target;
+            
+            // Check if elementClicked is a deleteButton
+            if (elementClicked.className === 'deleteButton') {
+                handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+            }
+        });
+    }
+};
 
-todoList.addTodo('c9')
 
-todoList.changeTodo(0, 'number one')
-
-todoList.deleteTodo(3, 1)
-
-
-
-
-
-
- 
-
-
+view.setUpEventListeners();
 
