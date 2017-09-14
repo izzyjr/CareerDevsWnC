@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 //Version 9
-=======
+
 //Version 11
->>>>>>> v11
+
 var todoList = {
     todos: [], 
     
@@ -11,8 +11,7 @@ var todoList = {
         todoText: todoText,
         completed: false 
     });
-   
-<<<<<<< HEAD
+
     },
     changeTodo: function (position, todoText){    
     this.todos[position].todoText = todoText;
@@ -49,7 +48,7 @@ var todoList = {
             }
         }
         
-=======
+
     },
     changeTodo: function (position, todoText){    
     this.todos[position].todoText = todoText;
@@ -111,7 +110,7 @@ var handlers = {
     deleteTodo: function(position){
         todoList.deleteTodo(position);
         view.displayTodos( );
->>>>>>> v11
+
     },
         // ^ There should be a buttton for deleting todos
     toggleCompleted: function ( ){
@@ -124,7 +123,7 @@ var handlers = {
     
 };
 
-<<<<<<< HEAD
+
 var handlers = {
     toggleAll: function( ){
         todoList.toggleAll( );
@@ -189,7 +188,7 @@ var view = {
     //  ^ Each li element should containe .todotext
     //  ^ Each li element should show .completion
 };
-=======
+
 var view = {
     displayTodos:  function ( ){
         var todosUl = document.querySelector('ul');
@@ -231,7 +230,7 @@ var view = {
     }
 };
 
->>>>>>> v11
+
 
 view.setUpEventListeners();
 
